@@ -2,7 +2,7 @@
 
 **Date:** May 8, 2026  
 **Project:** ScarZero Movie Store - Java Implementation  
-**Repository:** https://github.com/sifat-jaman-13/Movie-Store-With-Java
+**Repository:** [https://github.com/sifat-jaman-13/Movie-Store-With-Java](https://github.com/sifat-jaman-13/Moive-Project-Java)
 
 ---
 
