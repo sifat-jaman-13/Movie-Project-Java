@@ -57,6 +57,8 @@ Option 2: Build JAR and Run
 
 Project Structure
 =================
+
+```text
 src/main/java/com/moviestore/
 ├── MovieStoreApp.java           - Main application class
 ├── auth/                        - Authentication modules
@@ -70,6 +72,7 @@ src/main/java/com/moviestore/
 │   ├── LibraryView.java
 │   └── AdminDashboardView.java
 └── resources/                   - Configuration files
+```
 
 Default Credentials
 ===================
