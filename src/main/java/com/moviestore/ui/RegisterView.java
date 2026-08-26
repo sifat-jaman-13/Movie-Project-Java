@@ -12,6 +12,10 @@ import java.util.UUID;
  * Registration view for new users
  */
 public class RegisterView {
+    // Starting credit for new accounts. Nothing in the UI tops up a wallet, so
+    // without this a new user could never complete a checkout.
+    private static final double STARTING_WALLET_BALANCE = 50.00;
+
     private VBox view;
     private BorderPane parent;
     
@@ -102,7 +106,7 @@ public class RegisterView {
             return;
         }
         
-        User newUser = new User(UUID.randomUUID().toString(), username, password, email, 0.0);
+        User newUser = new User(UUID.randomUUID().toString(), username, password, email, STARTING_WALLET_BALANCE);
         dm.addUser(newUser);
         
         showInfo("Success", "Account created successfully! Please login.");

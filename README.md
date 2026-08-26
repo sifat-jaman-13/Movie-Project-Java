@@ -53,7 +53,7 @@ The project is a companion to [GameStore-Python](https://github.com/sifat-jaman-
 | **Cart** | Review selected films with a running total, remove items, or check out |
 | **Library** | View films already purchased |
 
-Checkout debits the wallet through `User.deductFromWallet(...)` and moves each film into the buyer's library. If the balance is short, it is refused with an "Insufficient Funds" alert — which, as shipped, is what a new account will always see. See [Known Limitations](#-known-limitations).
+Checkout debits the wallet through `User.deductFromWallet(...)` and moves each film into the buyer's library. New accounts open with a $50.00 credit, so a fresh user can buy three or four films; once that is spent, checkout is refused with an "Insufficient Funds" alert. See [Known Limitations](#-known-limitations).
 
 ### Admin console
 
@@ -278,7 +278,7 @@ Expected — see [Data Persistence](#-data-persistence). Nothing is saved to dis
 ## ⚠️ Known Limitations
 
 1. **Nothing persists.** All state is in memory and is discarded when the application exits.
-2. **A new account cannot buy anything.** Registration sets the wallet balance to `0.0`, and no view exposes the wallet top-up logic that exists in `DataManager` — so `deductFromWallet` always refuses and checkout always reports "Insufficient Funds". Raising the starting balance in `RegisterView`, or surfacing the wallet request screen, fixes this.
+2. **A wallet cannot be topped up.** New accounts start with a $50.00 credit (`STARTING_WALLET_BALANCE` in `RegisterView`), which is enough for three or four films. Once it is spent, checkout reports "Insufficient Funds" and there is no way to add more — the top-up logic in `DataManager` is not surfaced by any view.
 3. **Stock is never decremented.** `Movie` has `getStock`/`setStock` and stock is captured when a film is added, but no purchase path reduces it.
 4. **Wallet requests, profile requests, and messaging are unreachable** from the UI, as described above.
 5. **The admin console has two tabs only** — Manage Movies and Manage Users. There is no dashboard, no analytics, no category management, and no way to edit or delete a film once added.
@@ -291,7 +291,7 @@ Expected — see [Data Persistence](#-data-persistence). Nothing is saved to dis
 ## 🗺️ Roadmap
 
 - [ ] Persist state — serialise the `DataManager` collections, or move to SQLite behind the existing method signatures
-- [ ] Give new accounts a starting balance, or build the wallet top-up view
+- [ ] Build the wallet top-up view so a spent balance can be refilled
 - [ ] Decrement stock on purchase and block checkout on sold-out titles
 - [ ] Build admin screens for the wallet, profile, and message queues already implemented in `core/`
 - [ ] Add edit and delete for films, and category management
