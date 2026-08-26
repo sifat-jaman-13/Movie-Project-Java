@@ -2,7 +2,7 @@
 
 **Date:** May 8, 2026  
 **Project:** ScarZero Movie Store - Java Implementation  
-**Repository:** [Moive-Project-Java](https://github.com/sifat-jaman-13/Moive-Project-Java)
+**Repository:** [Movie-Project-Java](https://github.com/sifat-jaman-13/Movie-Project-Java)
 
 ---
 
@@ -107,12 +107,9 @@ Output: MovieStore.jar (10.7 MB)
 #### Dependency Resolution
 ```
 Dependencies:
-- JavaFX Controls 21.0.2 - ✅
-- JavaFX FXML 21.0.2 - ✅
-- JavaFX Graphics 21.0.2 - ✅
-- Gson 2.10.1 - ✅
-- SLF4J 1.7.36 - ✅
-- Logback 1.4.8 - ✅
+- JavaFX Controls 21 - ✅
+- JavaFX Graphics 21 - ✅
+- JUnit 4.13.2 (test scope) - ✅
 
 All dependencies downloaded and resolved successfully
 ```

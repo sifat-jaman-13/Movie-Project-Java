@@ -1,542 +1,338 @@
-# 🎬 ScarZero Movie Store (Java Edition)
+# 🎬 ScarZero Movie Store — Java Edition
 
-> A comprehensive movie store management system with separate user and admin interfaces built with Java and JavaFX.
+> A desktop movie store with separate customer and administrator interfaces, built in Java 17 with JavaFX 21 over an in-memory data layer.
 
-## 🔗 Quick Links
-[![Java](https://img.shields.io/badge/Java-Official%20Site-ED8B00?logo=java&logoColor=white)](https://www.java.com/)
-[![Course](https://img.shields.io/badge/Course-CSE215%20OOP-yellow?logo=education)](https://ece.northsouth.edu/courses/cse-135/)
-[![JavaFX](https://img.shields.io/badge/JavaFX-Official%20Site-0078D4?logo=oracle&logoColor=white)](https://gluonhq.com/products/javafx/)
-[![Maven](https://img.shields.io/badge/Maven-Official%20Site-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
-[![NSU](https://img.shields.io/badge/NSU-North%20South%20University-1E90FF?logo=graduation-cap&logoColor=white)](https://www.northsouth.edu/)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-333333?logo=github)](https://github.com/sifat-jaman-13/Moive-Project-Java)
+[![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![JavaFX](https://img.shields.io/badge/JavaFX-21-1F8ACB?logo=java&logoColor=white)](https://openjfx.io/)
+[![Maven](https://img.shields.io/badge/Maven-3.6%2B-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
+[![Course](https://img.shields.io/badge/Course-CSE215-yellow)](https://ece.northsouth.edu/)
+[![NSU](https://img.shields.io/badge/NSU-North%20South%20University-1E90FF)](https://www.northsouth.edu/)
 
-[![Java Version](https://img.shields.io/badge/java-17%2B-orange)](https://www.oracle.com/java/technologies/downloads/)
-[![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-green)](#-quick-start)
+[![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-brightgreen)](#-quick-start)
 [![License](https://img.shields.io/badge/license-proprietary-blue)](#-license)
+[![Repository](https://img.shields.io/badge/GitHub-Movie--Project--Java-333333?logo=github)](https://github.com/sifat-jaman-13/Movie-Project-Java)
 
 ---
 
 ## 📚 Project Information
 
-**Author:** Sifat Jaman  
-**Course:** CSE101 - Object-Oriented Programming Project  
-**Institution:** North South University  
-**Type:** Solo Project  
-**Status:** ✅ Development Complete  
-**Language:** Java 17+ with JavaFX 21
+| Field | Value |
+|-------|-------|
+| **Project** | ScarZero Movie Store — Java Edition |
+| **Author** | Sifat Jaman |
+| **Course** | CSE215 — Programming Language II |
+| **Institution** | North South University |
+| **Type** | Solo project |
+| **Language** | Java 17 |
+| **GUI Framework** | JavaFX 21 |
+| **Build Tool** | Maven (shade plugin → `MovieStore.jar`) |
+| **Size** | 14 Java files, 1,487 lines of code |
+| **Repository** | [sifat-jaman-13/Movie-Project-Java](https://github.com/sifat-jaman-13/Movie-Project-Java) |
 
 ---
 
-## 🎯 Project Overview
+## 🎯 Overview
 
-ScarZero Movie Store is a Java-based movie store management system following the same architecture as the Python Game Store. It demonstrates advanced OOP concepts with modern Java features and professional GUI development using JavaFX.
+ScarZero Movie Store is a single JavaFX application with two entry paths: a **customer view** where users register, browse a catalogue of 40 films, add titles to a cart, check out, and keep a library of purchases; and an **admin console** reached through a separate login, where an administrator adds films and reviews registered accounts.
 
-### ✨ Key Features
+All state is held in memory by a singleton `DataManager`. The catalogue is seeded in code at startup; anything created during a session — accounts, carts, purchases — exists only until the process exits. See [Data Persistence](#-data-persistence) for what this means in practice.
 
-#### User Features
-- 🔐 User Registration & Login
-- 🎬 Browse Movie Catalog
-- 🛒 Shopping Cart Management
-- 💳 Wallet System
-- 📚 Movie Library (Purchased Movies)
-- 💬 Messaging System (Framework ready)
-- 👤 User Profile Management
+The project is a companion to [GameStore-Python](https://github.com/sifat-jaman-13/GameStore-Python): the same storefront idea, rebuilt to practise Java classes, inheritance, encapsulation, and the singleton pattern.
 
-#### Admin Features
-- 🔐 Secure Admin Login (with attempt limiting)
-- 🎬 Add/Edit/Delete Movies
-- 👥 Manage Users
-- 📊 Movie Categories Management
-- 💰 Handle Wallet Requests
-- 💬 View Messages
-- 📈 System Statistics
+---
 
-### Architecture Highlights
-- ✅ **OOP Principles**: Encapsulation, Inheritance, Polymorphism
-- ✅ **Design Patterns**: Singleton (DataManager), MVC (Views & Controllers)
-- ✅ **Modern Java**: Java 17+ features, Lambdas, Streams
-- ✅ **Professional GUI**: JavaFX with Scene Builder compatibility
-- ✅ **Cross-Platform**: Runs on Windows, Linux, macOS
-- ✅ **Maven Build**: Professional dependency management
+## ✨ Features
+
+### Customer flow
+
+| View | Capability |
+|------|-----------|
+| **Login** | Sign in with a username and password created during registration |
+| **Register** | Create an account; checks for empty fields, password confirmation mismatch, and duplicate usernames |
+| **Dashboard** | Browse all 40 films in a list, select one to read its details, add it to the cart |
+| **Cart** | Review selected films with a running total, remove items, or check out |
+| **Library** | View films already purchased |
+
+Checkout debits the wallet through `User.deductFromWallet(...)` and moves each film into the buyer's library. If the balance is short, it is refused with an "Insufficient Funds" alert — which, as shipped, is what a new account will always see. See [Known Limitations](#-known-limitations).
+
+### Admin console
+
+| Tab | Capability |
+|-----|-----------|
+| **Manage Movies** | Add a film (id, title, genre, director, price, year, description, stock) and view the current catalogue |
+| **Manage Users** | View registered accounts and a total-users count |
+
+Admin login allows a maximum of 5 attempts.
+
+### Implemented in the data layer, not yet in the UI
+
+`DataManager` carries complete, working logic for three further features that **no screen currently reaches**:
+
+- **Wallet top-up requests** — `addWalletRequest`, `getPendingWalletRequests`, `approveWalletRequest`, `rejectWalletRequest`
+- **Profile change requests** — `addProfileRequest`, `getPendingProfileRequests`, `approveProfileRequest`, `rejectProfileRequest`
+- **Support messages** — `addMessage`, `getAllMessages`, `getUserMessages`
+
+The `WalletRequest`, `ProfileRequest`, and `Message` classes exist and are exercised by these methods, but no JavaFX view calls them. They are listed here as scaffolding for future work, not as usable features.
 
 ---
 
 ## 📋 Requirements
 
-### System Requirements
-- **OS:** Windows 10+, Linux (Ubuntu 20.04+, Fedora 33+), macOS 10.13+
-- **Java:** JDK 17 or higher
-- **Maven:** 3.6 or higher
-- **RAM:** 1 GB minimum
-- **Disk Space:** 200 MB (with Maven cache)
+| Requirement | Minimum |
+|-------------|---------|
+| **OS** | Windows 10+, Linux (Ubuntu 20.04+), macOS 10.13+ |
+| **JDK** | 17 or higher |
+| **Maven** | 3.6 or higher |
+| **RAM** | 512 MB |
+| **Disk** | ~200 MB including the Maven repository |
 
-### Check Your Installation
+### Dependencies
+
+| Dependency | Version | Scope |
+|-----------|---------|-------|
+| `org.openjfx:javafx-controls` | 21 | compile |
+| `org.openjfx:javafx-graphics` | 21 | compile |
+| `junit:junit` | 4.13.2 | test |
+
+Maven resolves these on the first build. No FXML is used — every view is constructed in Java.
+
+### Verify your toolchain
+
 ```bash
-java -version      # Should show Java 17+
-mvn -version       # Should show Maven 3.6+
+java -version
+```
+
+```bash
+mvn -version
 ```
 
 ---
 
 ## 🚀 Quick Start
 
-### Windows Setup
-
-#### Option 1: Using Maven (Recommended)
 ```bash
-# Navigate to project directory
-cd "path\to\Movie Store With Java"
-
-# Build and run
-mvn clean javafx:run
+git clone https://github.com/sifat-jaman-13/Movie-Project-Java.git
 ```
 
-#### Option 2: Build JAR
 ```bash
-# Build the project
+cd Movie-Project-Java
+```
+
+```bash
 mvn clean package
-
-# Run the JAR
-java -jar target\MovieStore.jar
 ```
 
-#### Option 3: Using IDE
-1. Open in IntelliJ IDEA or Eclipse
-2. Mark `src\main\java` as Sources Root
-3. Run `MovieStoreApp.java` main class
+For a step-by-step Windows walkthrough including JDK and Maven installation, see [WINDOWS_SETUP.md](WINDOWS_SETUP.md). On Linux and macOS, [setup_linux.sh](setup_linux.sh) checks your toolchain and runs the build:
 
-### Linux Setup
-
-#### Option 1: Automated Setup (Recommended)
 ```bash
-# Navigate to project directory
-cd path/to/Movie\ Store\ With\ Java
-
-# Make script executable
-chmod +x setup_linux.sh
-
-# Run setup
-./setup_linux.sh
-```
-
-#### Option 2: Manual Setup
-```bash
-# Navigate to project directory
-cd path/to/Movie\ Store\ With\ Java
-
-# Build and run
-mvn clean javafx:run
-```
-
-### macOS Setup
-```bash
-# Same as Linux
-chmod +x setup_linux.sh
-./setup_linux.sh
-
-# Or directly:
-mvn clean javafx:run
+chmod +x setup_linux.sh && ./setup_linux.sh
 ```
 
 ---
 
-## 🎮 Running the Application
+## 🖥️ Usage
 
-### Start the Application
+### Run through Maven
+
 ```bash
-mvn clean javafx:run
+mvn javafx:run
 ```
 
-### Login Screen
-You'll see the login view with three options:
-1. **User Login** - Log in with existing account
-2. **Register** - Create new user account
-3. **Admin Login** - Access admin console
+### Run the packaged JAR
 
-### Admin Credentials
+`mvn clean package` shades dependencies into a single runnable JAR named by the shade plugin's `finalName`:
+
+```bash
+java -jar target/MovieStore.jar
+```
+
+The application opens at 1000×700. `DataManager.getInstance().initializeData()` seeds the 40-film catalogue before the login view is shown. The main class is `com.moviestore.MovieStoreApp`.
+
+---
+
+## 🔐 Default Credentials
+
+### Admin console
+
 ```
 Username: Sifat
 Password: sifat
 ```
 
-⚠️ **Note:** Admin login has 5-attempt limit for security.
+Hardcoded in [`AdminLoginView.java`](src/main/java/com/moviestore/ui/AdminLoginView.java) as `ADMIN_USERNAME` and `ADMIN_PASSWORD`, with `MAX_ATTEMPTS = 5`.
 
-### Default Test User
-After registering, you can create your own account and start using the store.
+### Customer accounts
+
+There are **none**. Unlike the Python edition, no demo users are seeded — `initializeData()` populates films only. Register an account on first run.
+
+> ⚠️ **Security note:** the admin credentials are compiled into the source, and user passwords are held as plain strings with no hashing. That is acceptable for a coursework demonstration and unacceptable anywhere else.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Movie Store With Java/
-├── pom.xml                          # Maven configuration
-├── src/
-│   ├── main/
-│   │   ├── java/com/moviestore/
-│   │   │   ├── MovieStoreApp.java        # Main entry point
-│   │   │   ├── core/
-│   │   │   │   ├── Movie.java            # Movie model
-│   │   │   │   ├── User.java             # User model
-│   │   │   │   └── DataManager.java      # Data management (Singleton)
-│   │   │   ├── auth/                     # Authentication modules
-│   │   │   │   ├── LoginView.java
-│   │   │   │   ├── RegisterView.java
-│   │   │   │   └── AdminLoginView.java
-│   │   │   └── ui/                       # JavaFX UI Views
-│   │   │       ├── UserDashboardView.java
-│   │   │       ├── CartView.java
-│   │   │       ├── LibraryView.java
-│   │   │       └── AdminDashboardView.java
-│   │   └── resources/                    # Configuration files
-│   └── test/java/                        # Unit tests
-├── target/                              # Build output
-├── README.md                            # This file
-├── WINDOWS_SETUP.md                     # Windows setup guide
-├── setup_linux.sh                       # Linux setup script
-└── LICENSE                              # Proprietary license
+Movie-Project-Java/
+├── pom.xml                             # Maven build, JavaFX + shade config
+├── setup_linux.sh                      # Linux/macOS toolchain check and build
+├── WINDOWS_SETUP.md                    # Detailed Windows setup guide
+├── TEST_REPORT.md                      # Manual test report
+├── LICENSE                             # Proprietary license
+├── ScarZero_Movie_Store_Documentation.docx
+└── src/main/java/com/moviestore/
+    ├── MovieStoreApp.java              # Application entry point, stage setup
+    ├── core/
+    │   ├── DataManager.java            # Singleton store for all in-memory state
+    │   ├── Movie.java                  # id, title, genre, director, price, year, description, stock
+    │   ├── User.java                   # id, username, password, email, walletBalance, registrationDate
+    │   ├── Message.java                # Support message record
+    │   ├── WalletRequest.java          # Top-up request record
+    │   └── ProfileRequest.java         # Profile change request record
+    └── ui/
+        ├── LoginView.java              # Customer login
+        ├── RegisterView.java           # Customer registration and validation
+        ├── UserDashboardView.java      # Catalogue browsing and details
+        ├── CartView.java               # Cart, total, checkout
+        ├── LibraryView.java            # Purchased films
+        ├── AdminLoginView.java         # Admin login with attempt limiting
+        └── AdminDashboardView.java     # Manage Movies and Manage Users tabs
 ```
 
 ---
 
-## 🛠️ Maven Commands Reference
+## 🏗️ Architecture
 
-### Build Commands
-```bash
-# Clean compile
-mvn clean compile
+Two packages, one responsibility each:
 
-# Build with tests
-mvn clean test
+- **`core/`** — the model and the data layer. `DataManager` is a lazily-initialised, `synchronized` singleton holding every collection: `List<User>`, `List<Movie>`, and `Map<String, List<Movie>>` for each user's cart and library, keyed by user id. All reads and writes go through its methods; no view touches a collection directly.
+- **`ui/`** — the JavaFX views. Each is a class exposing a `getView()` that returns its node, which the caller swaps into the shared `BorderPane` centre. Navigation is therefore explicit: a view builds its successor and sets it on the parent pane.
 
-# Package into JAR
-mvn clean package
+The model classes implement `Serializable` and declare a `serialVersionUID`, which prepares them for object serialisation — but no code serialises them today.
 
-# Skip tests during build
-mvn clean package -DskipTests
-```
+### Patterns used
 
-### Run Commands
-```bash
-# Run with JavaFX plugin
-mvn javafx:run
-
-# Run JAR file
-java -jar target/MovieStore.jar
-
-# Run with custom heap size
-java -Xmx1024m -jar target/MovieStore.jar
-```
-
-### Maven Options
-```bash
-# Verbose output
-mvn clean javafx:run -X
-
-# Offline mode
-mvn clean javafx:run -o
-
-# Skip tests
-mvn clean javafx:run -DskipTests
-```
+| Pattern | Where |
+|---------|-------|
+| **Singleton** | `DataManager.getInstance()` — one synchronised instance for all state |
+| **Encapsulation** | Private fields with getters and setters across all `core/` classes |
+| **Separation of concerns** | `ui/` renders and delegates; `core/` owns state and rules |
 
 ---
 
-## 🔐 Default Credentials
+## 💾 Data Persistence
 
-### Admin Panel
+**There is none.** This is the most important thing to know before running the project.
+
+`DataManager` holds everything in `ArrayList` and `HashMap` fields. There is no file or database I/O anywhere in the codebase — no `java.io` reader or writer, no JDBC, no serialisation call. `saveAllData()` exists and prints a confirmation, but writes nothing:
+
+```java
+public void saveAllData() {
+    // In production, this would save to database
+    System.out.println("Data saved successfully");
+}
 ```
-Username: admin
-Password: admin123
-```
 
-### User Store
-Create an account when you run the application for the first time.
+Consequently, on every restart:
 
----
+| Data | Behaviour on restart |
+|------|---------------------|
+| Film catalogue | Re-seeded from code — the same 40 films every time |
+| Registered accounts | **Lost** |
+| Cart contents | **Lost** |
+| Purchased library | **Lost** |
+| Films added by the admin | **Lost** |
+| Wallet balances | **Lost** |
 
-## 🏗️ Project Architecture
+Adding persistence is the first item on the [Roadmap](#-roadmap). Because the model classes are already `Serializable` and all access is funnelled through `DataManager`, it can be done behind the existing method signatures without touching a single view.
 
-### Design Patterns Used
-
-1. **Singleton Pattern** (DataManager)
-   - Centralized data management
-   - Single instance across application
-
-2. **MVC Pattern**
-   - Views: JavaFX UI components
-   - Controllers: Logic in View classes
-   - Models: Movie, User classes
-
-3. **Factory Pattern**
-   - Creating Movie and User objects
-   - Dynamic view instantiation
-
-### Key Classes
-
-#### Core Models
-- `Movie.java` - Represents a movie with properties and methods
-- `User.java` - Represents a user account with wallet management
-- `DataManager.java` - Singleton managing all application data
-
-#### UI Views
-- `LoginView.java` - Authentication interface
-- `RegisterView.java` - User registration form
-- `UserDashboardView.java` - Main user interface
-- `CartView.java` - Shopping cart management
-- `LibraryView.java` - User's purchased movies
-- `AdminDashboardView.java` - Admin management console
-- `AdminLoginView.java` - Admin authentication
+> The Python edition takes the other approach and persists to pipe-separated text files. The contrast between the two is deliberate and is discussed in [TEST_REPORT.md](TEST_REPORT.md).
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Issue: Java not found
-**Solution:**
+**`mvn` is not recognised**
+Maven is not installed or not on your `PATH`. See [WINDOWS_SETUP.md](WINDOWS_SETUP.md).
+
+**`Error: JavaFX runtime components are missing`**
+You ran the class directly instead of through Maven or the shaded JAR. Use `mvn javafx:run`, or `java -jar target/MovieStore.jar`.
+
+**`invalid target release: 17`**
+Your JDK is older than 17. Check with `java -version` and confirm `JAVA_HOME` points at a JDK 17+ installation.
+
+**Build fails on the first run with dependency resolution errors**
+Maven needs network access to download JavaFX. Retry with `mvn -U clean package`.
+
+**The window opens blank or the UI is scaled oddly on Linux**
+Force the software pipeline:
+
 ```bash
-# Install Java 17+
-# Windows: Download from https://adoptium.net/
-# Linux: sudo apt-get install openjdk-17-jdk
-# macOS: brew install openjdk@17
+mvn javafx:run -Dprebuilt.javafx.args="-Dprism.order=sw"
 ```
 
-### Issue: Maven not found
-**Solution:**
-```bash
-# Install Maven
-# Windows: choco install maven
-# Linux: sudo apt-get install maven
-# macOS: brew install maven
-```
-
-### Issue: "Invalid source release"
-**Solution:**
-- Ensure Java 17+ is installed
-- Set JAVA_HOME environment variable
-- Check Maven settings.xml
-
-### Issue: GUI doesn't appear
-**Solution:**
-```bash
-# Make sure X11 or Wayland is available (Linux)
-# Try running with:
-mvn javafx:run -X
-```
-
-### Issue: Build fails with dependency errors
-**Solution:**
-```bash
-# Update Maven cache
-mvn clean install
-
-# Or skip tests:
-mvn clean package -DskipTests
-```
-
-### Issue: Port already in use (if running server)
-**Solution:**
-```bash
-# Kill process on port (if applicable)
-# Windows: netstat -ano | findstr :8080
-# Linux: lsof -i :8080
-```
+**My account is gone after restarting**
+Expected — see [Data Persistence](#-data-persistence). Nothing is saved to disk.
 
 ---
 
-## 📊 Sample Data
+## ⚠️ Known Limitations
 
-The application comes pre-loaded with sample movies:
-
-1. **Inception** (2010) - $12.99
-   - Director: Christopher Nolan
-   - Genre: Sci-Fi
-
-2. **The Dark Knight** (2008) - $14.99
-   - Director: Christopher Nolan
-   - Genre: Action
-
-3. **Interstellar** (2014) - $14.99
-   - Director: Christopher Nolan
-   - Genre: Sci-Fi
-
-4. **Pulp Fiction** (1994) - $9.99
-   - Director: Quentin Tarantino
-   - Genre: Crime
-
-5. **Forrest Gump** (1994) - $9.99
-   - Director: Robert Zemeckis
-   - Genre: Drama
+1. **Nothing persists.** All state is in memory and is discarded when the application exits.
+2. **A new account cannot buy anything.** Registration sets the wallet balance to `0.0`, and no view exposes the wallet top-up logic that exists in `DataManager` — so `deductFromWallet` always refuses and checkout always reports "Insufficient Funds". Raising the starting balance in `RegisterView`, or surfacing the wallet request screen, fixes this.
+3. **Stock is never decremented.** `Movie` has `getStock`/`setStock` and stock is captured when a film is added, but no purchase path reduces it.
+4. **Wallet requests, profile requests, and messaging are unreachable** from the UI, as described above.
+5. **The admin console has two tabs only** — Manage Movies and Manage Users. There is no dashboard, no analytics, no category management, and no way to edit or delete a film once added.
+6. **Passwords are plain text** and the admin credentials are compiled in.
+7. **No search or filtering.** The catalogue is one flat list; `getMoviesByGenre` exists in `DataManager` but no view calls it.
+8. **No automated tests.** JUnit is declared in `pom.xml` but `src/test` does not exist; verification was manual and is recorded in [TEST_REPORT.md](TEST_REPORT.md).
 
 ---
 
-## 🧪 Testing
+## 🗺️ Roadmap
 
-### Unit Tests
-```bash
-# Run all tests
-mvn test
-
-# Run specific test class
-mvn test -Dtest=MovieTest
-
-# Skip tests during build
-mvn package -DskipTests
-```
-
-### Manual Testing Checklist
-- [ ] User registration works
-- [ ] Login with valid credentials succeeds
-- [ ] Admin login has attempt limit
-- [ ] Add movies to cart
-- [ ] Checkout deducts from wallet
-- [ ] Movies appear in library after purchase
-- [ ] Admin can add movies
-- [ ] Admin can view users
-
----
-
-## 📈 Performance Considerations
-
-- **Startup Time:** ~3-5 seconds (first run may be slower)
-- **Memory Usage:** ~200-300 MB heap
-- **UI Responsiveness:** Smooth with sample data
-- **Data Operations:** In-memory for demo (no database)
-
-### Optimization Tips
-```bash
-# Reduce heap size for lower-end systems
-java -Xmx512m -jar target/MovieStore.jar
-
-# Use headless mode if no GUI needed
-java -Djava.awt.headless=true ...
-```
+- [ ] Persist state — serialise the `DataManager` collections, or move to SQLite behind the existing method signatures
+- [ ] Give new accounts a starting balance, or build the wallet top-up view
+- [ ] Decrement stock on purchase and block checkout on sold-out titles
+- [ ] Build admin screens for the wallet, profile, and message queues already implemented in `core/`
+- [ ] Add edit and delete for films, and category management
+- [ ] Add catalogue search and a genre filter using `getMoviesByGenre`
+- [ ] Hash passwords and move admin credentials out of the source
+- [ ] Add a JUnit suite covering `DataManager`
+- [ ] Extract inline styling into a stylesheet
 
 ---
 
 ## 🎓 Learning Outcomes
 
-This project demonstrates:
-
-- ✅ **Advanced OOP**: Encapsulation, inheritance, polymorphism
-- ✅ **Design Patterns**: Singleton, MVC, Factory
-- ✅ **Java Streams**: Functional programming with Stream API
-- ✅ **Lambda Expressions**: Modern Java syntax
-- ✅ **JavaFX**: Modern GUI framework
-- ✅ **Maven**: Professional build and dependency management
-- ✅ **Software Architecture**: Modular, maintainable code
-- ✅ **Exception Handling**: Robust error management
-- ✅ **Collections Framework**: Efficient data structures
+- **Object-oriented design** — modelling a domain as classes with encapsulated state and behaviour
+- **Design patterns** — a singleton data layer, and passing controllers between views
+- **JavaFX** — scene graph construction, layout panes, `TableView`/`ListView`, event handlers, and dialogs
+- **Collections framework** — `List` and `Map` for relational-style data without a database
+- **Build tooling** — Maven lifecycle, dependency scopes, and producing a runnable shaded JAR
+- **Cross-platform development** — one codebase running on Windows, Linux, and macOS
+- **Reading your own code honestly** — auditing what is actually wired up versus what merely exists
 
 ---
 
-## 🔄 Comparison: Python vs Java Version
+## 👤 Author
 
-| Aspect | Python (Game Store) | Java (Movie Store) |
-|--------|---------------------|------------------|
-| GUI Framework | customtkinter | JavaFX |
-| Build Tool | pip/uv | Maven |
-| Data Persistence | Text files | In-memory (extensible) |
-| Concurrency | asyncio ready | Thread-safe |
-| Type System | Dynamic | Static (strong typing) |
-| IDE Support | VS Code, PyCharm | IntelliJ IDEA, Eclipse |
-| Performance | Interpreted | Compiled/JIT |
-| Deploy | Virtual env | JAR/Docker |
+**Sifat Jaman** — [@sifat-jaman-13](https://github.com/sifat-jaman-13)
+North South University, Department of Electrical and Computer Engineering
+
+### Related projects
+
+- [**GameStore-Python**](https://github.com/sifat-jaman-13/GameStore-Python) — the same storefront architecture in Python with CustomTkinter, with file-based persistence, for CSE101
+- [**SAT**](https://github.com/sifat-jaman-13/SAT) — phonebook and movie library management systems in C, for CSE115L
 
 ---
 
 ## 📜 License
 
-**⚠️ PROPRIETARY LICENSE - ALL RIGHTS RESERVED**
+**Proprietary — all rights reserved.**
 
-This project is the exclusive intellectual property of **Sifat Jaman**.
+This project is the intellectual property of Sifat Jaman.
 
-### Usage Terms:
-- ✅ **Allowed:** View for educational purposes, fork for study
-- ❌ **NOT Allowed:** Commercial use, modification, distribution without permission
+- ✅ **Permitted:** viewing, building, and forking for study and educational reference
+- ❌ **Not permitted:** commercial use, redistribution, or reuse in other projects without written permission
 
-**To request permission:** Contact Sifat Jaman via GitHub
-
-See LICENSE file for complete terms.
-
----
-
-## 🚀 Next Steps
-
-1. **Run the Application**
-   ```bash
-   mvn clean javafx:run
-   ```
-
-2. **Create Admin Account**
-   - Login with admin/admin123
-
-3. **Add Movies**
-   - Use Admin Console to add more movies
-
-4. **Create User Account**
-   - Register new account
-
-5. **Buy Movies**
-   - Browse, add to cart, checkout
-
-6. **Explore Features**
-   - View library, manage cart, update wallet
-
----
-
-## 📞 Support & Contact
-
-**Author:** Sifat Jaman  
-**Institution:** North South University  
-**Course:** CSE101 - Object-Oriented Programming  
-**Project Type:** Solo Assignment
-
-For questions or issues:
-1. Check WINDOWS_SETUP.md for Windows-specific help
-2. Check setup_linux.sh for Linux/macOS help
-3. Review troubleshooting section above
-
----
-
-## 🎉 Quick Commands
-
-### Windows
-```bash
-# Setup
-mvn clean javafx:run
-
-# Build JAR
-mvn clean package
-
-# Run JAR
-java -jar target\MovieStore.jar
-```
-
-### Linux/macOS
-```bash
-# Automated setup
-chmod +x setup_linux.sh && ./setup_linux.sh
-
-# Or manual
-mvn clean javafx:run
-```
-
----
-
-## ✅ Verification Checklist
-
-Before reporting issues, verify:
-- [ ] Java 17+ installed: `java -version`
-- [ ] Maven installed: `mvn -version`
-- [ ] Project files present
-- [ ] Running from project root directory
-- [ ] No ports conflicting
-- [ ] Sufficient disk space (~500 MB)
-
----
-
-**Thank you for using ScarZero Movie Store (Java Edition)!** 🎬
-
-*Last Updated: May 8, 2026*  
-*Version: 1.0.0 - Development Complete*
+To request permission, contact [@sifat-jaman-13](https://github.com/sifat-jaman-13). See [LICENSE](LICENSE) for the full terms, including third-party component licences.

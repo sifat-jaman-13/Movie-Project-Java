@@ -12,7 +12,7 @@
 
     <name>ScarZero Movie Store</name>
     <description>A comprehensive movie store management system with JavaFX GUI</description>
-    <url>https://github.com/sifat-jaman-13/Movie-Store-With-Java</url>
+    <url>https://github.com/sifat-jaman-13/Movie-Project-Java</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +23,8 @@
     </properties>
 
     <dependencies>
-        <!-- JavaFX Dependencies -->
+        <!-- JavaFX: controls supplies the widget set, graphics the scene graph.
+             No FXML is used; the UI is built in Java. -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -31,32 +32,8 @@
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
-        </dependency>
-
-        <!-- JSON Processing (for data serialization) -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.7</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.4.8</version>
         </dependency>
 
         <!-- Testing -->

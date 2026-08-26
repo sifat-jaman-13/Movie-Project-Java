@@ -1,256 +1,121 @@
-SCARZERO MOVIE STORE (JAVA) - PROPRIETARY LICENSE
-Version 1.0 - Effective Date: May 8, 2026
+SCARZERO MOVIE STORE (JAVA EDITION) — PROPRIETARY LICENSE
+Version 1.1
+
+Project:     ScarZero Movie Store — Java Edition
+Author:      Sifat Jaman (github.com/sifat-jaman-13)
+Course:      CSE215 — Programming Language II
+Institution: North South University, Dhaka, Bangladesh
+Repository:  https://github.com/sifat-jaman-13/Movie-Project-Java
+
+Copyright (c) 2026 Sifat Jaman. All rights reserved.
 
 ================================================================================
 
-IMPORTANT: READ THIS LICENSE CAREFULLY BEFORE USING, COPYING, MODIFYING, OR
-DISTRIBUTING THIS SOFTWARE.
+READ THIS LICENSE BEFORE USING, COPYING, OR DISTRIBUTING THIS SOFTWARE.
+
+This is not an open-source license. It permits reading and studying the code;
+it does not permit reuse. If you need broader rights, see section 4.
 
 ================================================================================
 
-1. OWNERSHIP AND RIGHTS
+1. OWNERSHIP
 
-This software project "ScarZero Movie Store (Java Edition)" (hereinafter 
-"Software") is the exclusive intellectual property of Sifat Jaman (hereinafter 
-"Author"). All rights not expressly granted in this license are reserved by 
-the Author.
+"Software" means the source code, build configuration, and documentation in
+this repository. The Software is the original work and intellectual property
+of Sifat Jaman ("the Author"), produced as a solo project for CSE215 at North
+South University. All rights not expressly granted below are reserved.
 
-The Software was created as a solo project for CSE101 (Object-Oriented 
-Programming) course at North South University.
+2. PERMITTED USE — NO PERMISSION REQUIRED
 
-================================================================================
+You may, free of charge:
 
-2. GRANT OF LICENSE
+  (a) view and read the source code for learning purposes;
+  (b) build and run the Software locally to see how it behaves;
+  (c) fork or clone the repository for your own private study;
+  (d) quote short excerpts in reviews, discussions, or teaching material,
+      with attribution to the Author;
+  (e) as an educational institution or instructor, present the Software to
+      students as an example of object-oriented design or JavaFX interface
+      construction, with attribution.
 
-NO LICENSE IS GRANTED UNLESS EXPLICITLY PROVIDED IN WRITING BY THE AUTHOR.
+3. NOT PERMITTED WITHOUT WRITTEN PERMISSION
 
-The Author reserves the absolute right to:
-- Grant limited use licenses to specific individuals or organizations
-- Deny use to any party
-- Revoke this license at any time
-- Change license terms at any time with written notice
+You may not:
 
-================================================================================
+  (a) use the Software, or any part of it, in your own project — academic,
+      personal, or commercial;
+  (b) use the Software for any commercial purpose;
+  (c) publish a modified version, or distribute the Software or a built
+      artifact of it beyond the private study permitted in section 2;
+  (d) remove or alter the copyright notice or this license file;
+  (e) claim authorship of the Software or any part of it.
 
-3. PERMITTED USES (WITHOUT EXPLICIT PERMISSION)
+Forking on GitHub under section 2(c) is permitted; publishing that fork as
+your own work, or as a derivative product, is not.
 
-You may:
-- View the source code for educational and learning purposes only
-- Fork this repository on GitHub for your own study
-- Read and understand the implementation for learning OOP and Java concepts
-- Study the JavaFX implementation for GUI development learning
+4. REQUESTING PERMISSION
 
-You may NOT:
-- Use this Software for commercial purposes
-- Modify the Software without written permission from the Author
-- Distribute, sell, or share this Software with others
-- Create derivative works based on this Software
-- Use this Software in your own projects
-- Claim ownership or authorship of any part of this Software
-- Extract components for reuse in other projects
+To request rights beyond section 2, open an issue or contact the Author
+through GitHub: https://github.com/sifat-jaman-13
 
-================================================================================
+Please include who you are, what you want to use, and what for. The Author
+grants or refuses at their sole discretion. Silence is not permission.
 
-4. REQUEST FOR PERMISSION
+5. ACADEMIC INTEGRITY
 
-If you wish to use this Software beyond the permitted educational purposes,
-you MUST obtain explicit written permission from the Author.
+This Software was submitted as coursework. If you are a student:
 
-To request permission, contact:
-- Author: Sifat Jaman
-- Institution: North South University
-- Course: CSE101
-- GitHub: https://github.com/sifat-jaman-13
-- Repository: https://github.com/sifat-jaman-13/Moive-Project-Java
+  - Submitting this Software, in whole or in part, as your own work is
+    plagiarism. It is prohibited by this license and by the academic
+    integrity policy of every institution the Author is aware of.
+  - If your work is informed by this Software, cite it.
+  - Consequences of academic misconduct are yours, not the Author's.
 
-Permission requests should include:
-1. Your name and contact information
-2. Purpose of use (commercial, educational, research, etc.)
-3. How you intend to use the Software
-4. Duration of intended use
-5. Any modifications you plan to make
+6. THIRD-PARTY COMPONENTS
 
-The Author will review each request and respond within 14 days.
+The Software is built against the following, which are not covered by this
+license and remain under their own terms:
 
-================================================================================
+  - OpenJFX / JavaFX (javafx-controls, javafx-graphics) — GNU General Public
+    License v2 with the Classpath Exception
+  - JUnit 4 — Eclipse Public License 1.0
+  - Apache Maven and the Maven plugins used by the build (compiler, shade)
+    and the JavaFX Maven plugin — Apache License 2.0
+  - Java SE / OpenJDK 17 — GNU General Public License v2 with the Classpath
+    Exception
 
-5. PERMITTED MODIFICATIONS (WITH EXPLICIT PERMISSION)
+A "fat" JAR produced by the shade plugin bundles JavaFX classes, which stay
+subject to the GPLv2-with-Classpath-Exception terms above. Nothing in this
+license grants you rights to those components, and their licenses grant you
+no rights to this Software.
 
-If explicit written permission has been granted for use, the following may
-apply:
-- You may modify the Software only as explicitly permitted in your license grant
-- All modifications remain the property of the Author
-- You must not distribute modified versions without additional written consent
-- You must clearly indicate which parts you have modified
-- You must retain all copyright notices and license text
+7. NO WARRANTY
 
-================================================================================
-
-6. NO WARRANTY
-
-THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+The Software keeps all state in memory and discards it when the process
+exits. It uses hardcoded administrator credentials and does not hash
+passwords. It is a coursework exercise. Do not deploy it, and do not put real
+personal data into it.
 
-================================================================================
+8. TERMINATION
 
-7. ACADEMIC INTEGRITY
+Your rights under section 2 end automatically if you breach any term of this
+license. On termination, stop using the Software and delete your copies.
 
-This Software was created as an original work for academic purposes. Students,
-educators, and academic institutions are reminded:
-- PLAGIARISM: Using this Software as your own work violates academic integrity
-  policies of all institutions
-- ATTRIBUTION: If you use concepts or code from this Software, you MUST provide
-  proper attribution to Sifat Jaman
-- ACADEMIC CONSEQUENCES: Misuse of this Software may result in disciplinary
-  action by your institution
-- HONOR CODE: Respect intellectual property rights as per your institution's
-  honor code
+9. GOVERNING LAW
+
+This license is governed by the laws of Bangladesh. Any dispute arising from
+it shall be subject to the jurisdiction of the courts of Dhaka, Bangladesh.
 
 ================================================================================
 
-8. DISTRIBUTION
+By using, copying, or accessing the Software you accept these terms. If you
+do not accept them, do not use the Software.
 
-You may not distribute, sell, rent, lease, or lend this Software or any copy
-of it without explicit written permission from the Author.
-
-This includes:
-- Uploading to other code repositories
-- Sharing on personal websites or servers
-- Distributing to classmates or colleagues
-- Including in packages or bundles
-- Using as a base for template projects
-
-Any unauthorized distribution constitutes copyright infringement.
-
-================================================================================
-
-9. TERMINATION
-
-This license is effective until terminated. Your rights under this license
-will terminate automatically without notice from the Author if you fail to
-comply with any term(s) of this license.
-
-Upon termination of this license, you must destroy all copies of the Software
-in your possession.
-
-================================================================================
-
-10. THIRD-PARTY DEPENDENCIES
-
-This Software includes the following open-source dependencies, each with
-their own license terms:
-
-- JavaFX (OpenJFX) - Licensed under GPL v2 with Classpath Exception
-- Maven - Licensed under Apache License 2.0
-- Gson - Licensed under Apache License 2.0
-- SLF4J - Licensed under MIT License
-- Logback - Licensed under LGPL v2.1 and EPL v1.0
-- JUnit - Licensed under EPL v1.0
-
-These licenses do not grant you rights to this Software beyond the terms
-stated above.
-
-================================================================================
-
-11. GOVERNING LAW
-
-This license is governed by the laws of Bangladesh and the jurisdiction of
-North South University. Any legal disputes arising from this license shall be
-resolved in the courts of Dhaka, Bangladesh.
-
-================================================================================
-
-12. ENTIRE AGREEMENT
-
-This license constitutes the entire agreement between you and the Author
-concerning the Software and supersedes any prior agreements or understandings.
-
-No modification of this license is effective unless signed in writing by the
-Author.
-
-================================================================================
-
-13. SPECIAL TERMS FOR EDUCATIONAL INSTITUTIONS
-
-Educational institutions may:
-- Use this Software for teaching and learning purposes
-- Display this Software as an example of OOP and JavaFX implementation
-- Reference this project in coursework discussions
-
-Educational institutions may NOT:
-- Modify without permission
-- Distribute to external parties
-- Use for commercial purposes
-- Claim ownership
-
-Permission requests from educational institutions should reference:
-- Institution name
-- Course name and number
-- Instructor name
-- Intended educational use
-- Duration of use
-
-================================================================================
-
-14. SPECIAL TERMS FOR NORTH SOUTH UNIVERSITY
-
-As this project was created for North South University:
-
-- The university may retain a copy for archival and educational purposes
-- The university may display this as an example of student work
-- The university acknowledges the Author's ownership and copyright
-- All course credits and marks associated with this project remain the
-  intellectual property of the university, while the code remains the
-  intellectual property of the Author
-
-================================================================================
-
-15. CONTACT FOR LICENSING INQUIRIES
-
-For all licensing inquiries, permission requests, or questions about usage:
-
-Author: Sifat Jaman
-Institution: North South University
-Course: CSE101 - Object-Oriented Programming
-GitHub: https://github.com/sifat-jaman-13
-Repository: https://github.com/sifat-jaman-13/Moive-Project-Java
-
-Response Time: Up to 14 business days
-
-================================================================================
-
-16. ATTRIBUTION REQUIREMENTS
-
-If permission is granted to use this Software, you must:
-- Include the original copyright notice: "Copyright © 2026 Sifat Jaman"
-- Include this license text
-- Identify all modifications you have made
-- Provide proper citation: "Based on ScarZero Movie Store (Java) by Sifat Jaman"
-- Acknowledge JavaFX and Maven in your project
-
-================================================================================
-
-ACKNOWLEDGMENT
-
-By accessing, viewing, downloading, or using this Software in any way, you
-acknowledge that you have read this license, understand its terms, and agree
-to be bound by them.
-
-If you do not agree to these terms, you must immediately:
-- Stop using the Software
-- Delete all copies in your possession
-- Cease all access to the Software
-
-================================================================================
-
-Version: 1.0
-Effective Date: May 8, 2026
-Last Updated: May 8, 2026
-
-© 2026 Sifat Jaman. All Rights Reserved.
+© 2026 Sifat Jaman. All rights reserved.
