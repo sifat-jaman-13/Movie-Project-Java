@@ -9,7 +9,7 @@
 [![NSU](https://img.shields.io/badge/NSU-North%20South%20University-1E90FF)](https://www.northsouth.edu/)
 
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-brightgreen)](#-quick-start)
-[![License](https://img.shields.io/badge/license-proprietary-blue)](#-license)
+[![License](https://img.shields.io/badge/license-GPLv3-blue)](#-license)
 [![Repository](https://img.shields.io/badge/GitHub-Movie--Project--Java-333333?logo=github)](https://github.com/sifat-jaman-13/Movie-Project-Java)
 
 ---
@@ -177,7 +177,7 @@ Movie-Project-Java/
 ├── setup_linux.sh                      # Linux/macOS toolchain check and build
 ├── WINDOWS_SETUP.md                    # Detailed Windows setup guide
 ├── TEST_REPORT.md                      # Manual test report
-├── LICENSE                             # Proprietary license
+├── LICENSE                             # GPL-3.0-only license
 ├── ScarZero_Movie_Store_Documentation.docx
 └── src/main/java/com/moviestore/
     ├── MovieStoreApp.java              # Application entry point, stage setup
@@ -328,11 +328,4 @@ North South University, Department of Electrical and Computer Engineering
 
 ## 📜 License
 
-**Proprietary — all rights reserved.**
-
-This project is the intellectual property of Sifat Jaman.
-
-- ✅ **Permitted:** viewing, building, and forking for study and educational reference
-- ❌ **Not permitted:** commercial use, redistribution, or reuse in other projects without written permission
-
-To request permission, contact [@sifat-jaman-13](https://github.com/sifat-jaman-13). See [LICENSE](LICENSE) for the full terms, including third-party component licences.
+This project is licensed under the **GNU General Public License v3.0 only (GPL-3.0-only)**. See [LICENSE](LICENSE) for the full terms. Third-party components remain under their respective licenses.
