@@ -39,6 +39,8 @@ All state is held in memory by a singleton `DataManager`. The catalogue is seede
 
 The project is a companion to [GameStore-Python](https://github.com/sifat-jaman-13/GameStore-Python): the same storefront idea, rebuilt to practise Java classes, inheritance, encapsulation, and the singleton pattern.
 
+> **For students:** Treat this repository as a learning reference and a starting point for ideas, not as a project to copy and submit unchanged. Try implementing your own movie store, redesign its workflows, explore different JavaFX layouts, or extend it with features of your own. Make sure you understand the classes and patterns you use, and let your own problem-solving shape the final result.
+
 ---
 
 ## ✨ Features
