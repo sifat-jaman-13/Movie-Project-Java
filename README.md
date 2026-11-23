@@ -59,7 +59,7 @@ Checkout debits the wallet through `User.deductFromWallet(...)` and moves each f
 
 | Tab | Capability |
 |-----|-----------|
-| **Manage Movies** | Add a film (id, title, genre, director, price, year, description, stock) and view the current catalogue |
+| **Manage Movies** | Add a film by entering its title, genre, director, price, and release year; the app generates its ID and assigns a default description and stock value of 50 |
 | **Manage Users** | View registered accounts and a total-users count |
 
 Admin login allows a maximum of 5 attempts.
@@ -281,7 +281,7 @@ Expected — see [Data Persistence](#-data-persistence). Nothing is saved to dis
 2. **A wallet cannot be topped up.** New accounts start with a $50.00 credit (`STARTING_WALLET_BALANCE` in `RegisterView`), which is enough for three or four films. Once it is spent, checkout reports "Insufficient Funds" and there is no way to add more — the top-up logic in `DataManager` is not surfaced by any view.
 3. **Stock is never decremented.** `Movie` has `getStock`/`setStock` and stock is captured when a film is added, but no purchase path reduces it.
 4. **Wallet requests, profile requests, and messaging are unreachable** from the UI, as described above.
-5. **The admin console has two tabs only** — Manage Movies and Manage Users. There is no dashboard, no analytics, no category management, and no way to edit or delete a film once added.
+5. **The admin console has two tabs only** — Manage Movies and Manage Users. There is no dashboard, no analytics, no category management, and no edit or delete controls in the UI once a film has been added.
 6. **Passwords are plain text** and the admin credentials are compiled in.
 7. **No search or filtering.** The catalogue is one flat list; `getMoviesByGenre` exists in `DataManager` but no view calls it.
 8. **No automated tests.** JUnit is declared in `pom.xml` but `src/test` does not exist; verification was manual and is recorded in [TEST_REPORT.md](TEST_REPORT.md).
